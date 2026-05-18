@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🗾 2026 東京旅遊攻略</title>
+<style>
+:root {
+  --bg:#0d1117;--bg2:#161b22;--border:#30363d;
+  --red:#e84545;--gold:#f5a623;--blue:#58a6ff;
+  --green:#3fb950;--purple:#a371f7;--pink:#f778ba;
+  --text:#e6edf3;--muted:#8b949e;--card:#21262d;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+p,li,td,div{word-break:break-word;overflow-wrap:break-word;}
+html{-webkit-text-size-adjust:100%;}
+body{font-family:'Helvetica Neue','PingFang TC','Microsoft JhengHei',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;font-size:16px;line-height:1.7;}
+
+/* HEADER */
+header{background:linear-gradient(135deg,#1a0a2e 0%,#16213e 40%,#0f3460 100%);padding:28px 16px 20px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+header::before{content:'🌸 🗼 🎡 🌸 🗼 🎡 🌸';position:absolute;top:6px;left:0;right:0;font-size:13px;opacity:.25;letter-spacing:6px;}
+header h1{font-size:clamp(24px,6vw,40px);font-weight:700;color:#ffffff;margin-bottom:6px;}
+header p{color:var(--muted);font-size:15px;}
+.header-badges{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+.badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;font-size:13px;}
+
+/* TABS NAV */
+.tabs-nav{display:flex;background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:100;}
+.tabs-nav::-webkit-scrollbar{display:none;}
+.tab-btn{background:none;border:none;color:var(--muted);padding:13px 16px;cursor:pointer;font-size:15px;white-space:nowrap;border-bottom:2px solid transparent;font-family:inherit;-webkit-tap-highlight-color:transparent;min-height:48px;transition:color .15s;}
+.tab-btn:hover,.tab-btn:active{color:var(--text);background:rgba(255,255,255,.04);}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(245,166,35,.06);}
+
+/* CONTENT */
+.tab-content{display:none;padding:16px;max-width:700px;margin:0 auto;}
+.tab-content.active{display:block;}
+
+/* SECTION TITLE */
+.section-title{font-size:19px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+
+/* MEMBER CARDS */
+.member-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px;}
+@media(min-width:480px){.member-grid{grid-template-columns:repeat(4,1fr);}}
+.member-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 10px;text-align:center;position:relative;overflow:hidden;}
+.member-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.m-1::before{background:var(--blue);}
+.m-2::before{background:var(--green);}
+.m-3::before{background:var(--purple);}
+.m-4::before{background:var(--red);}
+.member-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 8px;}
+.m-1 .member-avatar{background:rgba(88,166,255,.15);}
+.m-2 .member-avatar{background:rgba(63,185,80,.15);}
+.m-3 .member-avatar{background:rgba(163,113,247,.15);}
+.m-4 .member-avatar{background:rgba(232,69,69,.15);}
+.member-group{font-size:13px;font-weight:700;letter-spacing:.5px;margin-bottom:2px;}
+.m-1 .member-group{color:var(--blue);}
+.m-2 .member-group{color:var(--green);}
+.m-3 .member-group{color:var(--purple);}
+.m-4 .member-group{color:var(--red);}
+.member-name{font-weight:700;font-size:17px;margin-bottom:3px;}
+.member-info{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 8px;text-align:center;}
+.stat-num{font-size:28px;font-weight:700;color:var(--gold);}
+.stat-label{font-size:13px;color:var(--muted);margin-top:3px;}
+
+/* DAY SELECTOR */
+.day-selector{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:16px;padding-bottom:4px;}
+.day-selector::-webkit-scrollbar{display:none;}
+.day-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:9px 13px;cursor:pointer;font-size:14px;font-family:inherit;white-space:nowrap;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:62px;-webkit-tap-highlight-color:transparent;}
+.day-btn.active{background:rgba(245,166,35,.1);border-color:var(--gold);color:var(--gold);}
+.day-btn .day-num{font-size:17px;font-weight:700;}
+.day-btn .day-label{font-size:12px;}
+
+/* TIMELINE */
+.day-panel{display:none;}
+.day-panel.active{display:block;}
+.day-header{background:linear-gradient(135deg,rgba(245,166,35,.1),rgba(232,69,69,.1));border:1px solid rgba(245,166,35,.3);border-radius:12px;padding:14px 16px;margin-bottom:16px;}
+.day-header h3{font-size:20px;font-weight:700;margin-bottom:4px;}
+.day-header p{color:var(--muted);font-size:14px;}
+.day-tag{display:inline-block;background:var(--gold);color:#000;border-radius:4px;padding:2px 9px;font-size:12px;font-weight:700;margin-bottom:6px;}
+.timeline{position:relative;padding-left:24px;}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),var(--border));}
+.timeline-item{position:relative;margin-bottom:16px;}
+.timeline-item::before{content:'';position:absolute;left:-18px;top:12px;width:8px;height:8px;border-radius:50%;border:2px solid var(--gold);background:var(--bg);}
+.timeline-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
+.timeline-time{font-size:13px;color:var(--gold);font-weight:700;margin-bottom:4px;}
+.timeline-title{font-size:17px;font-weight:700;display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:6px;line-height:1.4;}
+.act-type{font-size:12px;border-radius:4px;padding:2px 7px;font-weight:600;white-space:nowrap;}
+.act-art{background:rgba(163,113,247,.15);color:var(--purple);}
+.act-food{background:rgba(245,166,35,.15);color:var(--gold);}
+.act-transport{background:rgba(88,166,255,.15);color:var(--blue);}
+.act-hotel{background:rgba(63,185,80,.15);color:var(--green);}
+.act-theme{background:rgba(232,69,69,.15);color:var(--red);}
+.act-sightseeing{background:rgba(247,120,186,.15);color:var(--pink);}
+.act-shopping{background:rgba(255,165,0,.15);color:orange;}
+.timeline-desc{font-size:15px;color:var(--muted);line-height:1.7;}
+.timeline-bullets{margin-top:8px;padding-left:16px;}
+.timeline-bullets li{font-size:15px;color:var(--muted);margin-bottom:6px;line-height:1.7;}
+.timeline-bullets li strong{color:var(--text);}
+.highlight-box{background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.25);border-radius:8px;padding:10px 13px;margin-top:8px;font-size:15px;}
+.highlight-box .label{font-weight:700;color:var(--gold);margin-right:4px;}
+
+/* ROUTE CARDS */
+.route-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;}
+.route-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.route-member-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.dot-1{background:var(--blue);}
+.dot-2{background:var(--green);}
+.dot-3{background:var(--purple);}
+.dot-4{background:var(--red);}
+.route-title{font-weight:700;font-size:16px;flex:1;}
+.route-date{color:var(--muted);font-size:13px;}
+.route-steps{display:flex;align-items:center;flex-wrap:wrap;gap:4px;font-size:14px;}
+.route-step{background:rgba(255,255,255,.06);border-radius:4px;padding:4px 8px;font-size:13px;}
+.route-arrow{color:var(--muted);font-size:14px;}
+.route-note{margin-top:7px;font-size:14px;color:var(--muted);line-height:1.7;}
+.route-fare{display:inline-block;background:rgba(245,166,35,.1);color:var(--gold);border-radius:4px;padding:2px 8px;font-size:13px;font-weight:700;margin-top:5px;}
+.route-hidden{display:none;}
+
+/* MEMBER FILTER */
+.member-filter{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;}
+.filter-btn{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:8px 16px;cursor:pointer;font-size:14px;font-family:inherit;color:var(--muted);-webkit-tap-highlight-color:transparent;min-height:40px;}
+.filter-btn.active-all{border-color:var(--gold);color:var(--gold);background:rgba(245,166,35,.1);}
+.filter-btn.active-1{border-color:var(--blue);color:var(--blue);background:rgba(88,166,255,.1);}
+.filter-btn.active-2{border-color:var(--green);color:var(--green);background:rgba(63,185,80,.1);}
+.filter-btn.active-3{border-color:var(--purple);color:var(--purple);background:rgba(163,113,247,.1);}
+.filter-btn.active-4{border-color:var(--red);color:var(--red);background:rgba(232,69,69,.1);}
+
+/* HOTEL */
+.hotel-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:20px;}
+@media(min-width:520px){.hotel-grid{grid-template-columns:repeat(2,1fr);}}
+.hotel-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;position:relative;overflow:hidden;}
+.hotel-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.hotel-card.h1::before{background:linear-gradient(90deg,var(--blue),var(--purple));}
+.hotel-card.h2::before{background:linear-gradient(90deg,var(--green),var(--blue));}
+.hotel-card.h3::before{background:linear-gradient(90deg,var(--red),var(--gold));}
+.hotel-card.h4::before{background:linear-gradient(90deg,var(--purple),var(--pink));}
+.hotel-name{font-size:17px;font-weight:700;margin-bottom:4px;}
+.hotel-en{font-size:13px;color:var(--muted);margin-bottom:8px;}
+.hotel-detail{display:flex;gap:6px;align-items:flex-start;margin-bottom:5px;font-size:14px;}
+.hotel-detail .val{color:var(--muted);}
+.hotel-guests{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
+.guest-tag{border-radius:4px;padding:3px 8px;font-size:13px;}
+.gt-1{background:rgba(88,166,255,.15);color:var(--blue);}
+.gt-2{background:rgba(63,185,80,.15);color:var(--green);}
+.gt-3{background:rgba(163,113,247,.15);color:var(--purple);}
+.gt-4{background:rgba(232,69,69,.15);color:var(--red);}
+
+/* FLIGHT TABLE */
+.flight-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:16px;}
+.flight-table th{background:rgba(255,255,255,.05);padding:10px 11px;text-align:left;color:var(--muted);font-size:13px;border-bottom:1px solid var(--border);}
+.flight-table td{padding:10px 11px;border-bottom:1px solid rgba(255,255,255,.05);vertical-align:top;}
+.flight-table tr:hover td{background:rgba(255,255,255,.02);}
+
+/* INFO BANNER */
+.info-banner{background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.25);border-radius:10px;padding:13px 15px;font-size:14px;margin-bottom:16px;line-height:1.7;}
+.info-banner strong{color:var(--blue);}
+
+/* TIPS */
+.tip-list{display:flex;flex-direction:column;gap:10px;}
+.tip-card{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:13px 14px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.tip-header{display:flex;justify-content:space-between;align-items:center;}
+.tip-title{font-weight:700;font-size:16px;display:flex;align-items:center;gap:7px;}
+.tip-toggle{color:var(--muted);font-size:20px;flex-shrink:0;transition:transform .2s;line-height:1;}
+.tip-body{display:none;margin-top:10px;font-size:15px;color:var(--muted);line-height:1.8;}
+.tip-body.open{display:block;}
+.tip-body ul{padding-left:16px;}
+.tip-body li{margin-bottom:5px;}
+.tip-body strong{color:var(--text);}
+
+/* CHECKLIST */
+.checklist-section{margin-bottom:20px;}
+.checklist-category{margin-bottom:16px;}
+.checklist-cat-title{font-size:16px;font-weight:700;color:var(--gold);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;}
+.checklist-item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border-radius:8px;margin-bottom:4px;transition:background .15s;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.checklist-item:hover{background:rgba(255,255,255,.03);}
+.checklist-item input[type=checkbox]{width:20px;height:20px;flex-shrink:0;cursor:pointer;accent-color:var(--gold);margin-top:1px;}
+.checklist-item label{font-size:15px;cursor:pointer;line-height:1.6;}
+.checklist-item label.checked{text-decoration:line-through;color:var(--muted);}
+.checklist-item .who{font-size:12px;border-radius:3px;padding:1px 6px;margin-left:6px;vertical-align:middle;}
+.who-1{background:rgba(88,166,255,.15);color:var(--blue);}
+.who-2{background:rgba(63,185,80,.15);color:var(--green);}
+.who-3{background:rgba(163,113,247,.15);color:var(--purple);}
+.who-4{background:rgba(232,69,69,.15);color:var(--red);}
+.who-all{background:rgba(245,166,35,.15);color:var(--gold);}
+.checklist-progress{background:rgba(255,255,255,.06);border-radius:8px;padding:12px 14px;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.progress-bar-wrap{flex:1;height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;}
+.progress-bar{height:100%;background:var(--gold);border-radius:3px;transition:width .3s;}
+.progress-text{font-size:14px;color:var(--muted);white-space:nowrap;}
+.reset-btn{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:6px 12px;cursor:pointer;font-size:13px;font-family:inherit;-webkit-tap-highlight-color:transparent;}
+
+/* OVERVIEW ITEMS */
+.overview-day-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px 14px;margin-bottom:8px;}
+.overview-day-card .ov-date{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:4px;}
+.overview-day-card .ov-title{font-size:17px;font-weight:700;margin-bottom:3px;}
+.overview-day-card .ov-desc{font-size:14px;color:var(--muted);}
+
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+
+/* MAP LINK */
+.map-link{display:inline-flex;align-items:center;gap:4px;background:rgba(88,166,255,.12);border:1px solid rgba(88,166,255,.3);color:var(--blue);border-radius:6px;padding:5px 11px;font-size:13px;font-weight:600;text-decoration:none;margin-top:7px;-webkit-tap-highlight-color:transparent;transition:background .15s;}
+.map-link:hover,.map-link:active{background:rgba(88,166,255,.25);}
+.map-link svg{flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>2026 東京旅遊攻略</h1>
+  <p>5月24日(日) — 5月30日(六)　✈ 台灣出發</p>
+</header>
+
+<nav class="tabs-nav">
+  <button class="tab-btn active" onclick="switchTab('overview',this)">🗾 總覽</button>
+  <button class="tab-btn" onclick="switchTab('itinerary',this)">📅 每日行程</button>
+  <button class="tab-btn" onclick="switchTab('transport',this)">🚇 交通攻略</button>
+  <button class="tab-btn" onclick="switchTab('hotel',this)">🏨 住宿</button>
+  <button class="tab-btn" onclick="switchTab('checklist',this)">✅ 出發清單</button>
+  <button class="tab-btn" onclick="switchTab('tips',this)">💡 專家提醒</button>
+  <button class="tab-btn" onclick="switchTab('flight',this)">✈ 航班</button>
+</nav>
+
+<!-- ===== TAB 1: 總覽 ===== -->
+<div id="tab-overview" class="tab-content active">
+  <div class="section-title">👥 四組成員</div>
+  <div class="member-grid">
+    <div class="member-card m-1">
+      <div class="member-avatar"><img src="data:image/png;base64,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" style="width:40px;height:44px;object-fit:contain;display:block;margin:0 auto;"></div>
+      <div class="member-group">13 組</div>
+      <div class="member-name">13</div>
+      <div class="member-info">提早抵達・西早稻田<br><span style="color:var(--text);font-size:13px">👤 13</span></div>
+    </div>
+    <div class="member-card m-2">
+      <div class="member-avatar"><img src="data:image/png;base64,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" style="width:40px;height:44px;object-fit:contain;display:block;margin:0 auto;"></div>
+      <div class="member-group">Tomo 組</div>
+      <div class="member-name">Tomo</div>
+      <div class="member-info">虎航 IT200・台北出發<br><span style="color:var(--text);font-size:13px">👥 Tomo・芘卡菈</span></div>
+    </div>
+    <div class="member-card m-3">
+      <div class="member-avatar"><img src="data:image/png;base64,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" style="width:40px;height:44px;object-fit:contain;display:block;margin:0 auto;"></div>
+      <div class="member-group">丘 組</div>
+      <div class="member-name">丘</div>
+      <div class="member-info">虎航 IT280・高雄出發<br><span style="color:var(--text);font-size:13px">👥 丘・阿妞・小雅琪・阿捲</span></div>
+    </div>
+    <div class="member-card m-4">
+      <div class="member-avatar"><img src="data:image/png;base64,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" style="width:40px;height:44px;object-fit:contain;display:block;margin:0 auto;"></div>
+      <div class="member-group">王至聖 組</div>
+      <div class="member-name">王至聖</div>
+      <div class="member-info">星宇 JX800・台北出發<br><span style="color:var(--text);font-size:13px">👥 王至聖・瑩芷</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">📊 行程概覽</div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">旅行天數</div></div>
+    <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">旅行組別</div></div>
+    <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">迪士尼樂園</div></div>
+    <div class="stat-card"><div class="stat-num">1</div><div class="stat-label">teamLab</div></div>
+    <div class="stat-card"><div class="stat-num">3+</div><div class="stat-label">特色住宿</div></div>
+    <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">主要景區</div></div>
+  </div>
+
+  <div class="section-title">📋 七天行程速覽</div>
+  <div class="overview-day-card" style="border-left:3px solid var(--purple)">
+    <div class="ov-date">5/24 (日) Day 1</div>
+    <div class="ov-title">🛬 抵達東京 ＋ 🎨 teamLab Planets ＋ 🍱 LaLaport 豐洲</div>
+    <div class="ov-desc">各組從機場前往飯店 → 16:30 新豐洲集合 → 17:00 teamLab → 豐洲晚餐</div>
+  </div>
+  <div class="overview-day-card" style="border-left:3px solid var(--red)">
+    <div class="ov-date">5/25 (一) Day 2</div>
+    <div class="ov-title">🎢 東京迪士尼樂園 (Disneyland)</div>
+    <div class="ov-desc">07:00前到達排隊 → 08:30入園 → 全天遊玩 → 各自回飯店</div>
+  </div>
+  <div class="overview-day-card" style="border-left:3px solid var(--blue)">
+    <div class="ov-date">5/26 (二) Day 3</div>
+    <div class="ov-title">🌊 東京迪士尼海洋 (DisneySea)</div>
+    <div class="ov-desc">攻克夢幻泉鄉 Fantasy Springs → 入園即決戰 → Tomo 組換飯店</div>
+  </div>
+  <div class="overview-day-card" style="border-left:3px solid var(--green)">
+    <div class="ov-date">5/27 (三) Day 4</div>
+    <div class="ov-title">⛩ 川越小江戶 ＋ 🥩 新宿燒肉慶功宴</div>
+    <div class="ov-desc">8大1小全員移防新宿 → 特急小江戶號 → 川越鰻魚飯＋散策 → 燒肉之夜</div>
+  </div>
+  <div class="overview-day-card" style="border-left:3px solid var(--pink)">
+    <div class="ov-date">5/28 (四) Day 5</div>
+    <div class="ov-title">⛩ 明治神宮 ＋ ☕ 清澄白河 ＋ 🎮 秋葉原</div>
+    <div class="ov-desc">森林浴 → 文青咖啡 → 電器街 → 居酒屋慶功</div>
+  </div>
+  <div class="overview-day-card" style="border-left:3px solid var(--gold)">
+    <div class="ov-date">5/29 (五) Day 6</div>
+    <div class="ov-title">🎨 21_21 Design Sight ＋ 下午新宿 ＋ 13 組搭機回台</div>
+    <div class="ov-desc">21_21 Design Sight → 午餐六本木 → 丘・Tomo・王至聖 移師新宿 → 13 組 BR197 早上整理行李，當天行程不跟</div>
+  </div>
+  <div class="overview-day-card" style="border-left:3px solid var(--muted)">
+    <div class="ov-date">5/30 (六) Day 7</div>
+    <div class="ov-title">✈ N'EX 歸途：最後的東京巡禮</div>
+    <div class="ov-desc">丘組 IT281 08:29 N'EX → Tomo組/王至聖組 N'EX 45號 17:09 → 成田</div>
+  </div>
+</div>
+
+<!-- ===== TAB 2: 每日行程 ===== -->
+<div id="tab-itinerary" class="tab-content">
+  <div class="day-selector">
+    <button class="day-btn active" onclick="switchDay('d1',this)"><span class="day-num">5/24</span><span class="day-label">日·抵達</span></button>
+    <button class="day-btn" onclick="switchDay('d2',this)"><span class="day-num">5/25</span><span class="day-label">一·樂園</span></button>
+    <button class="day-btn" onclick="switchDay('d3',this)"><span class="day-num">5/26</span><span class="day-label">二·海洋</span></button>
+    <button class="day-btn" onclick="switchDay('d4',this)"><span class="day-num">5/27</span><span class="day-label">三·川越</span></button>
+    <button class="day-btn" onclick="switchDay('d5',this)"><span class="day-num">5/28</span><span class="day-label">四·文青</span></button>
+    <button class="day-btn" onclick="switchDay('d6',this)"><span class="day-num">5/29</span><span class="day-label">五·新宿</span></button>
+    <button class="day-btn" onclick="switchDay('d7',this)"><span class="day-num">5/30</span><span class="day-label">六·回台</span></button>
+  </div>
+
+  <!-- Day 1 -->
+  <div id="day-d1" class="day-panel active">
+    <div class="day-header">
+      <div class="day-tag">Day 1</div>
+      <h3>🛬 抵達東京：各自集結與藝術之夜</h3>
+      <p>5月24日(日)　16:30 新豐洲集合</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">11:00 - 14:00</div>
+        <div class="timeline-title"><span>✈</span>航班抵達與移動<span class="act-type act-transport">交通</span></div>
+        <ul class="timeline-bullets">
+          <li><strong style="color:var(--green)">Tomo 組</strong>：IT200 抵達 11:00 → 京成巴士直達新浦安（約60分鐘）→ 樂祥飯店</li>
+          <li><strong style="color:var(--purple)">丘 組</strong>：IT280 抵達 12:40 → 在二航廈與王至聖 組會合</li>
+          <li><strong style="color:var(--red)">王至聖 組</strong>：JX800 抵達 12:45 → 與丘 組合搭利木津巴士直達大使飯店（60-80分鐘）</li>
+        </ul>
+        <div class="highlight-box"><span class="label">💡</span>丘組 & 王至聖組在成田二航廈「星巴克」或「利木津售票處」會合，同搭機場利木津，免搬行李轉車。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">15:00 - 16:00</div>
+        <div class="timeline-title"><span>🏨</span>飯店 Check-in<span class="act-type act-hotel">住宿</span></div>
+        <ul class="timeline-bullets">
+          <li><strong style="color:var(--green)">Tomo 組</strong>：樂祥飯店 Check-in，可在明海公園散步或超商補給</li>
+          <li><strong style="color:var(--purple)">丘組 & <span style="color:var(--red)">王至聖組</span></strong>：大使飯店放行李，可逛 Ikspiari 商場</li>
+          <li><strong style="color:var(--blue)">13 組</strong>：15:30 從西早稻田出發</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">16:30</div>
+        <div class="timeline-title"><span>🎨</span>全員集合！teamLab Planets TOKYO<span class="act-type act-art">藝術</span></div>
+        <a href="https://maps.google.com/?q=35.6556,139.7853" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>teamLab Planets</a>
+        <ul class="timeline-bullets">
+          <li><strong>丘組 & 王至聖組</strong>：JR京葉線→新木場→百合海鷗號→豐洲→新豐洲</li>
+          <li><strong style="color:var(--blue)">13 組</strong>：東西線→飯田橋→有樂町線→豐洲</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">17:00 - 18:45</div>
+        <div class="timeline-title"><span>🌊</span>teamLab Planets TOKYO<span class="act-type act-art">藝術體驗</span></div>
+        <ul class="timeline-bullets">
+          <li><strong>地點：</strong>新豐洲站旁</li>
+          <li><strong>⚠ 提醒：</strong>全員需脫鞋入場，館內有水深及膝區域，請穿可捲褲管的褲子</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">18:45 - 19:00</div>
+        <div class="timeline-title"><span>🚶</span>移動至 LaLaport 豐洲<span class="act-type act-transport">交通</span></div>
+        <div class="timeline-desc">百合海鷗號新豐洲→豐洲（2分鐘），或步行12分鐘。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">19:00 - 21:00</div>
+        <div class="timeline-title"><span>🍣</span>晚餐：LaLaport 豐洲<span class="act-type act-food">美食</span></div>
+        <a href="https://maps.google.com/?q=35.6573,139.7961" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>LaLaport 豐洲</a>
+        <ul class="timeline-bullets">
+          <li><strong>推薦：</strong>利久牛舌 🥩、築地玉壽司 🍣（3樓美食街）</li>
+          <li><strong>人多建議：</strong>分組用餐或提前預訂包廂</li>
+          <li><strong>20:30 夜景：</strong>商場後方晴海運河步道，遠眺彩虹大橋 🌉</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">21:00</div>
+        <div class="timeline-title"><span>🚇</span>分三路返程<span class="act-type act-transport">交通</span></div>
+        <ul class="timeline-bullets">
+          <li><strong style="color:var(--blue)">13 組</strong>：豐洲→有樂町線→飯田橋→副都心線→西早稻田　<span style="color:var(--gold)">260日圓</span></li>
+          <li><strong style="color:var(--green)">Tomo 組</strong>：豐洲→有樂町線→新木場→JR京葉線→新浦安→接駁車→樂祥　<span style="color:var(--gold)">350日圓</span><br><span style="color:var(--red); font-size:13px">⚠ 樂祥在「新浦安」站，不是「舞濱」！</span></li>
+          <li><strong style="color:var(--purple)">丘組 & 王至聖組</strong>：豐洲→有樂町線→新木場→JR京葉線→舞濱→步行→大使飯店　<span style="color:var(--gold)">340日圓</span></li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div id="day-d2" class="day-panel">
+    <div class="day-header">
+      <div class="day-tag">Day 2</div>
+      <h3>🎢 東京迪士尼樂園 (TDL)</h3>
+      <p>5月25日(一)　入園08:45（提前入園）・關園21:00　⚠ 最晚08:00到達優先入園區域</p>
+    </div>
+    <div class="info-banner" style="background:rgba(232,69,69,.08);border-color:rgba(232,69,69,.3);">🔴 <strong>當日維修：</strong>#26 加勒比海盜・#53 豪華馬克吐溫號・#55 巨雷山・#80 小飛象　敬請注意！</div>
+
+    <!-- 必玩攻略 summary -->
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px;">
+      <div style="font-weight:700;font-size:19px;color:var(--gold);margin-bottom:10px;">🎯 必玩 &amp; 推薦設施</div>
+      <div style="font-size:18px;margin-bottom:8px;"><span style="color:var(--red);font-weight:700">【必玩】</span>
+        <span style="background:rgba(232,69,69,.1);color:var(--red);border-radius:4px;padding:2px 6px;margin:2px;display:inline-block">#120 星際旅行 (PP)</span>
+        <span style="background:rgba(232,69,69,.1);color:var(--red);border-radius:4px;padding:2px 6px;margin:2px;display:inline-block">#123 怪獸電力公司 (PP)</span>
+        <span style="background:rgba(245,166,35,.1);color:var(--gold);border-radius:4px;padding:2px 6px;margin:2px;display:inline-block">#82 美女與野獸 (DPA)</span>
+        <span style="background:rgba(245,166,35,.1);color:var(--gold);border-radius:4px;padding:2px 6px;margin:2px;display:inline-block">#84 小熊維尼 (PP)</span>
+        <span style="background:rgba(88,166,255,.1);color:var(--blue);border-radius:4px;padding:2px 6px;margin:2px;display:inline-block">#76 小小世界</span>
+        <span style="background:rgba(232,69,69,.1);color:var(--red);border-radius:4px;padding:2px 6px;margin:2px;display:inline-block">#85 幽靈公館 (PP)</span>
+      </div>
+      <div style="font-size:18px;"><span style="color:var(--muted);font-weight:700">【推薦】</span>
+        <span style="background:rgba(255,255,255,.06);border-radius:4px;padding:2px 6px;margin:2px;display:inline-block;font-size:13px">#70 飛濺山 (DPA)</span>
+        <span style="background:rgba(255,255,255,.06);border-radius:4px;padding:2px 6px;margin:2px;display:inline-block;font-size:13px">城堡旋轉木馬</span>
+        <span style="background:rgba(255,255,255,.06);border-radius:4px;padding:2px 6px;margin:2px;display:inline-block;font-size:13px">白雪公主・彼得潘・木偶奇遇記</span>
+        <span style="background:rgba(255,255,255,.06);border-radius:4px;padding:2px 6px;margin:2px;display:inline-block;font-size:13px">#110 兔子羅傑卡通轉轉車</span>
+      </div>
+      <div style="margin-top:10px;font-size:18px;color:var(--muted);">
+        🎭 <strong style="color:var(--text)">必看遊行：</strong>13:00日間遊行(45分) + 19:30夜間遊行(45分)<br>
+        🎆 <strong style="color:var(--text)">視情況加看：</strong>20:30城堡煙火(5分) + 20:50 Reach for the Stars(20分)<br>
+        🛍 <strong style="color:var(--text)">可購物品：</strong>爆米花桶・三眼怪麻吉
+      </div>
+    </div>
+
+    <!-- DPA/PP 警示 -->
+    <div style="background:rgba(163,113,247,.08);border:1px solid rgba(163,113,247,.3);border-radius:10px;padding:12px 14px;font-size:18px;margin-bottom:14px;line-height:1.6;">
+      <div style="font-weight:700;color:var(--purple);margin-bottom:6px;">💳 DPA / PP 關鍵注意事項</div>
+      <div>⚡ <strong>DPA 美女與野獸</strong> → 10:30前即告售罄，<strong>入園第一件事先搶！</strong>飛濺山次之。</div>
+      <div>⚡ <strong>PP 怪獸電力公司・星際旅行・小熊維尼</strong> → 10:30前被抽完，先排怪獸抽小熊，第二輪抽幽靈。</div>
+      <div style="margin-top:6px;">⚠ DPA購買需綁定刷卡，請確認信用卡可接收國際簡訊或不需驗證。</div>
+      <div>✅ 不論 DPA 或 PP，入場均有<strong>1小時緩衝時間</strong>。</div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">05:40 - 07:00</div>
+        <div class="timeline-title"><span>🚇</span>清晨出發<span class="act-type act-transport">交通</span></div>
+        <ul class="timeline-bullets">
+          <li><strong style="color:var(--purple)">丘組 & 王至聖組（大使飯店）</strong>：06:30步行穿過Ikspiari，約10-12分鐘抵達。確認有無 Happy Entry 特權！</li>
+          <li><strong style="color:var(--green)">Tomo組（樂祥飯店）</strong>：06:20前搭飯店免費接駁車（約20分鐘）直達園區</li>
+          <li><strong style="color:var(--blue)">13組（西早稻田）</strong>：05:40出站→副都心線→新宿三丁目→丸之內線→東京站→京葉線→舞濱</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">08:00 - 08:45</div>
+        <div class="timeline-title"><span>⏳</span>入園前排隊 & 數位配置<span class="act-type act-theme">主題樂園</span></div>
+        <a href="https://maps.google.com/?q=35.6329,139.8804" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>東京迪士尼樂園</a>
+        <div class="highlight-box"><span class="label">🎯 入園第一秒：</span>1. 領取 #123「小熊維尼」10:30 PP　2. 購買 #82「美女與野獸」10:00 DPA<br>由領隊為全體4組統一操作，避免分散！</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">09:00 - 09:40</div>
+        <div class="timeline-title"><span>👾</span>#123 怪獸電力公司<span class="act-type act-theme">明日樂園</span></div>
+        <div class="timeline-desc">開園首站即衝，預計排隊20分鐘。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">09:40 - 10:20</div>
+        <div class="timeline-title"><span>🐰</span>#110 兔子羅傑卡通轉轉車 / 購物<span class="act-type act-theme">卡通城</span></div>
+        <div class="timeline-desc">看小熊維尼抽到幾點，選卡通城排隊時間少於30分的設施，或購物買爆米花、頭飾（與13組集合）。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">10:00 - 11:00</div>
+        <div class="timeline-title"><span>🌹</span>#82 美女與野獸「城堡奇緣」<span class="act-type act-theme">夢幻樂園</span></div>
+        <div class="timeline-desc">使用 DPA。</div>
+        <div class="highlight-box"><span class="label">💡 進場後：</span>立刻買 #70「飛濺山」17:00後的 DPA。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">10:30 - 11:30</div>
+        <div class="timeline-title"><span>🍯</span>#84 小熊維尼獵蜜記<span class="act-type act-theme">夢幻樂園</span></div>
+        <div class="timeline-desc">使用 PP。</div>
+        <div class="highlight-box"><span class="label">💡 使用後：</span>立刻抽 #85「幽靈公館」PP。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">11:30</div>
+        <div class="timeline-title"><span>🍽</span>午餐（夢幻樂園區）<span class="act-type act-food">美食</span></div>
+        <div class="timeline-desc" style="margin-bottom:8px;">三選一：</div>
+        <ul class="timeline-bullets">
+          <li><strong>#130 明日樂園舞台餐廳</strong>：漢堡・三明治（建議預約）</li>
+          <li><strong>#117 輝兒杜兒路兒好時光咖啡</strong>（卡通城）：米奇手套刈包</li>
+          <li><strong>#131 汎銀河披薩港</strong>：切片披薩與義式餃子</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">12:15</div>
+        <div class="timeline-title"><span>📍</span>日間遊行路徑卡位<span class="act-type act-theme">主題樂園</span></div>
+        <div class="timeline-desc">建議佔位在遊行起點（夢幻樂園小飛象附近），才可以盡早看完去排其他設施。</div>
+        <div class="highlight-box"><span class="label">💡 此時：</span>可抽 #120「星際旅行」PP。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">13:00 - 13:45</div>
+        <div class="timeline-title"><span>✨</span>迪士尼眾彩交融（日間遊行）<span class="act-type act-theme">主題樂園</span></div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">14:00 - 14:30</div>
+        <div class="timeline-title"><span>🌍</span>#76 小小世界<span class="act-type act-theme">夢幻樂園</span></div>
+        <div class="timeline-desc">排隊約20分鐘。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">14:30 - 15:00</div>
+        <div class="timeline-title"><span>👻</span>#85 幽靈公館<span class="act-type act-theme">夢幻樂園</span></div>
+        <div class="timeline-desc">使用 PP。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">15:00 - 16:00</div>
+        <div class="timeline-title"><span>🚀</span>#120 星際旅行<span class="act-type act-theme">明日樂園</span></div>
+        <div class="timeline-desc">使用 PP，排隊約20-30分鐘。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">16:00 - 17:30</div>
+        <div class="timeline-title"><span>🏰</span>夢幻樂園自由探索<span class="act-type act-theme">夢幻樂園</span></div>
+        <div class="timeline-desc">城堡旋轉木馬・白雪公主・彼得潘・木偶奇遇記（可與前一個時段對調）。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">17:00 - 18:00</div>
+        <div class="timeline-title"><span>🌊</span>#70 飛濺山<span class="act-type act-theme">動物世界</span></div>
+        <div class="timeline-desc">建議使用 DPA。結束後剩餘時間可自由購物或休息。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">18:30</div>
+        <div class="timeline-title"><span>🍽</span>晚餐（西部 / 夢幻區）<span class="act-type act-food">美食</span></div>
+        <div class="timeline-desc" style="margin-bottom:8px;">四選一：</div>
+        <ul class="timeline-bullets">
+          <li><strong>#64 西部牛仔廚房</strong>：火雞腿・香腸</li>
+          <li><strong>#65 土撥鼠營地廚房</strong>：冷麵・米漢堡</li>
+          <li><strong>#67 頑熊餐廳</strong>：各式口味咖哩飯</li>
+          <li><strong>#96 虎克船長廚房</strong>：切片披薩</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">19:00</div>
+        <div class="timeline-title"><span>📍</span>夜間遊行卡位<span class="act-type act-theme">主題樂園</span></div>
+        <div class="timeline-desc">建議佔位在城堡周圍。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">19:30 - 20:15</div>
+        <div class="timeline-title"><span>✨</span>電子大遊行～夢之光（夜間遊行）<span class="act-type act-theme">主題樂園</span></div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">20:10 - 21:00</div>
+        <div class="timeline-title"><span>🛍</span>世界市集購物<span class="act-type act-shopping">購物</span></div>
+        <div class="timeline-desc">於世界市集完成採買，離出口近且避開秀後人潮。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">20:30 / 20:50</div>
+        <div class="timeline-title"><span>🎆</span>城堡煙火 & Reach for the Stars<span class="act-type act-theme">主題樂園</span></div>
+        <div class="timeline-desc">城堡煙火5分鐘(20:30)＋城堡光影秀20分鐘(20:50)。視情況看秀或繼續購物。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">21:10</div>
+        <div class="timeline-title"><span>🚇</span>離園回程<span class="act-type act-transport">交通</span></div>
+        <ul class="timeline-bullets">
+          <li><strong style="color:var(--blue)">13組</strong>：舞濱→JR京葉線→東京站→東西線→高田馬場</li>
+          <li><strong style="color:var(--purple)">丘組 & 王至聖組</strong>：步行回大使飯店，最輕鬆</li>
+          <li><strong style="color:var(--green)">Tomo組</strong>：今晚辦退房，行李寄放樂祥，搭計程車移至 La'gent Hotel（約1,200日圓）</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- Day 3 -->
+  <div id="day-d3" class="day-panel">
+    <div class="day-header">
+      <div class="day-tag">Day 3</div>
+      <h3>🌊 東京迪士尼海洋 (DisneySea)</h3>
+      <p>5月26日(二)　入園 09:00 ／ 閉園 21:00　｜　攻克夢幻泉鄉 Fantasy Springs！</p>
+    </div>
+
+    <!-- 當日維修公告 -->
+    <div style="background:rgba(255,100,80,.08);border:1px solid rgba(255,100,80,.3);border-radius:10px;padding:10px 14px;margin:0 0 14px;font-size:14px;color:var(--text);line-height:1.7;">
+      ⚠️ <strong>當日維修：</strong>
+      <span style="color:#f87171;">#64 印第安納瓊斯</span>、<span style="color:#f87171;">#81 安娜與艾莎的冰雪之旅</span><br>
+      <span style="color:var(--muted);font-size:13px;">PP/DPA 策略已依此調整</span>
+    </div>
+
+    <!-- DPA 花費總覽：改用卡片式避免表格切字 -->
+    <div style="background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.25);border-radius:10px;padding:12px 14px;margin:0 0 14px;">
+      <div style="font-weight:700;font-size:16px;color:var(--purple);margin-bottom:10px;">💰 當日 DPA 預計花費（每人）</div>
+      <!-- 卡片式列表，避免三欄表格在手機切字 -->
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);border-radius:8px;padding:9px 12px;">
+          <div>
+            <div style="font-size:14px;font-weight:600;">#2 翱翔：夢幻奇航</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px;">⏰ 09:00 優先購買</div>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--purple);white-space:nowrap;margin-left:12px;">¥2,000</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);border-radius:8px;padding:9px 12px;">
+          <div>
+            <div style="font-size:14px;font-weight:600;">#82 樂佩公主天燈盛會</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px;">⏰ 09:00 優先購買</div>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--purple);white-space:nowrap;margin-left:12px;">¥2,000</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);border-radius:8px;padding:9px 12px;">
+          <div>
+            <div style="font-size:14px;font-weight:600;">#79 小飛俠夢幻島歷險記</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px;">⏰ 11:00 視票量補買</div>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--purple);white-space:nowrap;margin-left:12px;">¥2,000</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(139,92,246,.2);padding-top:8px;margin-top:2px;">
+          <div style="font-size:13px;color:var(--muted);">合計（以官方 APP 當日顯示為準）</div>
+          <div style="font-size:16px;font-weight:700;color:var(--purple);white-space:nowrap;margin-left:12px;">約 ¥6,000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <!-- 清晨交通 -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">05:40 - 07:00</div>
+        <div class="timeline-title"><span>🚇</span>清晨出發（建議 07:00~07:30 抵達安檢）<span class="act-type act-transport">交通</span></div>
+        <ul class="timeline-bullets">
+          <li><strong style="color:var(--purple)">丘組 & 王至聖組</strong>：迪士尼單軌電車 Monorail → 迪士尼海洋站</li>
+          <li><strong style="color:var(--green)">Tomo 組（La'gent）</strong>：06:15 或 06:35 首班免費接駁車（約20分鐘）直達海洋</li>
+          <li><strong style="color:var(--blue)">13 組</strong>：同前日路線抵達舞濱，再轉單軌電車</li>
+        </ul>
+      </div></div>
+
+      <!-- 09:00 入園 -->
+      <div class="timeline-item"><div class="timeline-card" style="border-left:3px solid var(--purple);">
+        <div class="timeline-time">09:00</div>
+        <div class="timeline-title"><span>🎡</span>入園 ＆ 第一輪數位配置<span class="act-type act-theme">主題樂園</span></div>
+        <a href="https://maps.google.com/?q=35.6267,139.8852" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>東京迪士尼海洋</a>
+        <div style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:10px 12px;margin-top:8px;">
+          <div style="font-weight:700;color:var(--purple);font-size:14px;margin-bottom:8px;">📱 入園即執行 4 步驟：</div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="display:flex;align-items:flex-start;gap:8px;font-size:14px;">
+              <span style="background:var(--purple);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;">1</span>
+              <span>買 <strong>#82 樂佩公主</strong> 15:00 <span style="background:rgba(139,92,246,.2);color:var(--purple);border-radius:4px;padding:1px 5px;font-size:12px;">DPA</span></span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:8px;font-size:14px;">
+              <span style="background:var(--purple);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;">2</span>
+              <span>買 <strong>#2 翱翔：夢幻奇航</strong> 13:00 <span style="background:rgba(139,92,246,.2);color:var(--purple);border-radius:4px;padding:1px 5px;font-size:12px;">DPA</span></span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:8px;font-size:14px;">
+              <span style="background:var(--purple);color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;">3</span>
+              <span>買 <strong>堅信！夢想之海</strong>（晚間大秀）<span style="background:rgba(139,92,246,.2);color:var(--purple);border-radius:4px;padding:1px 5px;font-size:12px;">DPA</span></span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:8px;font-size:14px;">
+              <span style="background:rgba(245,158,11,1);color:#000;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;">4</span>
+              <span>領 <strong>#66 憤怒雙神</strong> 14:00 <span style="background:rgba(245,158,11,.2);color:#f59e0b;border-radius:4px;padding:1px 5px;font-size:12px;">PP</span></span>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--muted);margin-top:8px;line-height:1.6;">💡 冰雪奇緣維修，人潮衝夢幻泉鄉，翱翔與樂佩公主易賣完，務必優先搶！</div>
+      </div></div>
+
+      <!-- 09:15 玩具總動員 -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">09:15</div>
+        <div class="timeline-title"><span>🎯</span>#30 玩具總動員瘋狂遊戲屋<span class="act-type act-theme">現場排隊</span></div>
+        <div class="timeline-desc">📍 美國海濱｜建議首站直接現場排隊，完成數位配置後立刻前往。</div>
+      </div></div>
+
+      <!-- 11:00 驚魂古塔 -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">11:00</div>
+        <div class="timeline-title"><span>🏚</span>#27 驚魂古塔<span class="act-type act-theme">現場排隊</span></div>
+        <div class="timeline-desc">📍 美國海濱｜現場排隊。</div>
+        <div class="highlight-box">
+          <span class="label">📱 同步執行第二輪任務（排隊時操作 APP）：</span>
+          <ol style="margin:6px 0 0 14px;padding:0;font-size:18px;line-height:1.8;">
+            <li>買 <strong>#79 小飛俠夢幻島歷險記 16:00 DPA</strong></li>
+            <li>領看看 <strong>#57 海底尋遊艇：尼莫與好友 PP</strong>（排隊時間較穩定，可視情況用排的）</li>
+          </ol>
+        </div>
+      </div></div>
+
+      <!-- 12:00 午餐 -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">12:00</div>
+        <div class="timeline-title"><span>🍽️</span>午餐（美國海濱 三選一）<span class="act-type act-food">美食</span></div>
+        <ul class="timeline-bullets">
+          <li><strong>#45 德倫西餐車</strong>：熱狗堡</li>
+          <li><strong>#46 船屋邊快餐館</strong>：漢堡</li>
+          <li><strong>#47 紐約美味坊</strong>：熟食三明治</li>
+        </ul>
+      </div></div>
+
+      <!-- 13:00 翱翔 DPA -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">13:00</div>
+        <div class="timeline-title"><span>✈️</span>#2 翱翔：夢幻奇航<span class="act-type act-theme">主題樂園</span><span style="background:rgba(139,92,246,.2);color:var(--purple);font-size:10px;padding:2px 7px;border-radius:20px;margin-left:4px;font-weight:600;">DPA</span></div>
+        <div class="timeline-desc">📍 地中海港灣｜使用 DPA 入場，省去極長排隊時間。</div>
+      </div></div>
+
+      <!-- 14:00 閃耀歡騰慶典 -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">14:00</div>
+        <div class="timeline-title"><span>✨</span>閃耀歡騰慶典（日間表演）<span class="act-type act-show">表演</span></div>
+        <div class="timeline-desc">📍 地中海港灣水域｜迪士尼日間水上表演，推薦於港灣邊觀賞。</div>
+      </div></div>
+
+      <!-- 14:45 憤怒雙神 PP -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">14:45</div>
+        <div class="timeline-title"><span>⚡</span>#66 憤怒雙神<span class="act-type act-theme">主題樂園</span><span style="background:rgba(245,158,11,.2);color:#f59e0b;font-size:10px;padding:2px 7px;border-radius:20px;margin-left:4px;font-weight:600;">PP</span></div>
+        <div class="timeline-desc">📍 失落河三角洲｜使用 PP 入場。（印第安納瓊斯維修，改搶憤怒雙神！）</div>
+      </div></div>
+
+      <!-- 15:30 樂佩公主 DPA -->
+      <div class="timeline-item"><div class="timeline-card" style="border-left:3px solid #a78bfa;">
+        <div class="timeline-time">15:30</div>
+        <div class="timeline-title"><span>🏮</span>#82 樂佩公主天燈盛會<span class="act-type act-theme">主題樂園</span><span style="background:rgba(139,92,246,.2);color:var(--purple);font-size:10px;padding:2px 7px;border-radius:20px;margin-left:4px;font-weight:600;">DPA</span></div>
+        <div class="timeline-desc">📍 夢幻泉鄉（新園區）｜使用 DPA 入場，天燈升空超震撼！</div>
+      </div></div>
+
+      <!-- 16:30 小飛俠 DPA -->
+      <div class="timeline-item"><div class="timeline-card" style="border-left:3px solid #a78bfa;">
+        <div class="timeline-time">16:30</div>
+        <div class="timeline-title"><span>🧚</span>#79 小飛俠夢幻島歷險記<span class="act-type act-theme">主題樂園</span><span style="background:rgba(139,92,246,.2);color:var(--purple);font-size:10px;padding:2px 7px;border-radius:20px;margin-left:4px;font-weight:600;">DPA</span></div>
+        <div class="timeline-desc">📍 夢幻泉鄉（新園區）｜使用 DPA，沉浸於夢幻島冒險體驗。</div>
+      </div></div>
+
+      <!-- 17:30 海底尋遊艇 PP -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">17:30</div>
+        <div class="timeline-title"><span>🐠</span>#57 海底尋遊艇：尼莫與好友<span class="act-type act-theme">主題樂園</span><span style="background:rgba(245,158,11,.2);color:#f59e0b;font-size:10px;padding:2px 7px;border-radius:20px;margin-left:4px;font-weight:600;">PP</span></div>
+        <div class="timeline-desc">📍 發現港｜使用 PP。</div>
+        <div class="highlight-box">
+          <span class="label">📱 此時領看看：</span>
+          <span style="font-size:18px;"><strong>#92 神燈劇場 PP</strong></span>
+        </div>
+      </div></div>
+
+      <!-- 18:15 神燈劇場 PP -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">18:15</div>
+        <div class="timeline-title"><span>🪄</span>#92 神燈劇場<span class="act-type act-theme">主題樂園</span><span style="background:rgba(245,158,11,.2);color:#f59e0b;font-size:10px;padding:2px 7px;border-radius:20px;margin-left:4px;font-weight:600;">PP</span></div>
+        <div class="timeline-desc">📍 阿拉伯海岸｜使用 PP，魔毯飛行秀場體驗。</div>
+      </div></div>
+
+      <!-- 18:45 晚餐 -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">18:45</div>
+        <div class="timeline-title"><span>🍽️</span>晚間用餐（二選一）<span class="act-type act-food">美食</span></div>
+        <ul class="timeline-bullets">
+          <li><strong>#96 凱茲堡餐飲廣場</strong>：各式咖哩（鄰近神燈劇場，方便轉移）</li>
+          <li><strong>#21 尚比尼兄弟餐廳</strong>：義大利麵、披薩（鄰近晚間大秀場地，佔位優勢）</li>
+        </ul>
+      </div></div>
+
+      <!-- 19:30 堅信！大秀 DPA -->
+      <div class="timeline-item"><div class="timeline-card" style="border-left:3px solid #38bdf8;">
+        <div class="timeline-time">19:30</div>
+        <div class="timeline-title"><span>🌊</span>堅信！～夢想之海～<span class="act-type act-show">壓軸大秀</span><span style="background:rgba(139,92,246,.2);color:var(--purple);font-size:10px;padding:2px 7px;border-radius:20px;margin-left:4px;font-weight:600;">DPA</span></div>
+        <div class="timeline-desc">📍 地中海港灣｜港灣大型水上投影大秀，使用 DPA 保留位觀賞！全日最震撼壓軸。</div>
+      </div></div>
+
+      <!-- 20:10 購物 -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">20:10</div>
+        <div class="timeline-title"><span>🛍️</span>購物時間<span class="act-type act-shopping">購物</span></div>
+        <div class="timeline-desc">📍 入口處地中海港灣商店｜採購紀念品，趁人潮散去輕鬆掃貨。</div>
+      </div></div>
+
+      <!-- 20:40 眾彩滿夜空煙火 -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">20:40</div>
+        <div class="timeline-title"><span>🎆</span>眾彩滿夜空（海上煙火）<span class="act-type act-show">表演</span></div>
+        <div class="timeline-desc">📍 港灣區域｜海面煙火，圓滿收官東京迪士尼兩日行程！</div>
+      </div></div>
+
+      <!-- 21:00 離園 & 回程 -->
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">21:00 離園</div>
+        <div class="timeline-title"><span>🚇</span>回程<span class="act-type act-transport">交通</span></div>
+        <ul class="timeline-bullets">
+          <li><strong style="color:var(--blue)">13 組</strong>：舞濱→JR京葉線→東京站→丸之內線→新宿三丁目→副都心線→西早稻田</li>
+          <li><strong style="color:var(--green)">Tomo 組</strong>：La'gent 飯店末班接駁車，或搭公車 3號/23號</li>
+          <li><strong style="color:var(--purple)">丘組 & 王至聖組</strong>：單軌電車→度假區總站，步行回大使飯店</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- Day 4 -->
+  <div id="day-d4" class="day-panel">
+    <div class="day-header">
+      <div class="day-tag">Day 4</div>
+      <h3>⛩ 川越小江戶 ＋ 🥩 新宿燒肉慶功宴</h3>
+      <p>5月27日(三)　全員移防新宿，8大1小大集合！</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">08:30 - 10:00</div>
+        <div class="timeline-title"><span>🧳</span>移防新宿、全員會合<span class="act-type act-hotel">住宿</span></div>
+        <a href="https://maps.google.com/?q=35.6932,139.7031" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>新宿格蘭貝爾酒店</a>
+        <ul class="timeline-bullets">
+          <li><strong style="color:var(--blue)">13 組</strong>：副都心線→東新宿，步行至格蘭貝爾酒店</li>
+          <li><strong>Tomo組 & 丘組 & 王至聖組</strong>：迪士尼區→JR→新宿，寄放行李</li>
+          <li>🎉 全員在格蘭貝爾酒店大廳集合！</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">10:00 - 11:00</div>
+        <div class="timeline-title"><span>🚃</span>新宿 → 川越<span class="act-type act-transport">交通</span></div>
+        <div class="highlight-box"><span class="label">🚂 特急小江戶號：</span>西武新宿站搭乘（步行約10分鐘），全對號座，約50分鐘，適合8大1小聊天休息。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">11:00 - 13:00</div>
+        <div class="timeline-title"><span>🍱</span>午餐：川越鰻魚飯<span class="act-type act-food">美食</span></div>
+        <a href="https://maps.google.com/?q=35.9249,139.4855" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>川越 いちのや</a>
+        <div class="timeline-desc">推薦：川越 いちのや (Ichinoya) — 提供大型包廂（個室）預約，9人團體極其方便。</div>
+        <div class="highlight-box"><span class="label">📞 重要：</span>必須提前預約包廂！必點蒲燒鰻魚飯、鰻魚玉子燒。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">13:00 - 16:30</div>
+        <div class="timeline-title"><span>⛩</span>川越散策<span class="act-type act-sightseeing">觀光</span></div>
+        <a href="https://maps.google.com/?q=35.9253,139.4880" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>冰川神社</a> <a href="https://maps.google.com/?q=35.9243,139.4861" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>時之鐘</a> <a href="https://maps.google.com/?q=35.9238,139.4852" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>菓子屋橫丁</a>
+        <ul class="timeline-bullets">
+          <li>❄ 冰川神社（釣鯛魚）</li>
+          <li>🕰 時之鐘</li>
+          <li>🍡 菓子屋橫丁</li>
+        </ul>
+        <div class="highlight-box"><span class="label">🚕</span>建議拆成兩台計程車在景點間移動（單程約1,000日圓），效率遠高於等巴士。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">19:00</div>
+        <div class="timeline-title"><span>🥩</span>新宿燒肉慶功宴<span class="act-type act-food">美食</span></div>
+        <a href="https://maps.google.com/?q=35.6940,139.7023" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>燒肉一丁目</a>
+        <div class="timeline-desc">推薦：新宿 燒肉一丁目（距格蘭貝爾步行5-8分鐘，一人6,000-8,000日圓）</div>
+        <div class="highlight-box"><span class="label">📞 重要：</span>非常熱門，務必提前預約！備選：燒肉 龍之巢 新宿三丁目店。</div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- Day 5 -->
+  <div id="day-d5" class="day-panel">
+    <div class="day-header">
+      <div class="day-tag">Day 5</div>
+      <h3>⛩ 明治神宮 ＋ ☕ 清澄白河 ＋ 🎮 秋葉原</h3>
+      <p>5月28日(四)　東西大橫貫：森林、文青、電器街</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">09:00 - 11:30</div>
+        <div class="timeline-title"><span>⛩</span>明治神宮<span class="act-type act-sightseeing">觀光</span></div>
+        <a href="https://maps.google.com/?q=35.6763,139.6993" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>明治神宮</a>
+        <ul class="timeline-bullets">
+          <li><strong>Tomo組 & 丘組 & 王至聖組</strong>：東新宿站→副都心線→明治神宮前站（3站）</li>
+          <li><strong style="color:var(--blue)">13 組</strong>：西早稻田→副都心線→明治神宮前站（2站）</li>
+          <li>東京鬧區中的綠洲，週四早晨安靜，適合帶小孩散步</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">11:30 - 13:30</div>
+        <div class="timeline-title"><span>🍜</span>午餐：原宿<span class="act-type act-food">美食</span></div>
+        <a href="https://maps.google.com/?q=35.6694,139.7018" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>AFURI 阿夫利</a>
+        <ul class="timeline-bullets">
+          <li><strong>推薦1 AFURI 阿夫利</strong>：空間小，分3-4組排隊。超過40分鐘立刻轉！</li>
+          <li><strong>推薦2 原宿餃子樓</strong>：翻桌快，有大桌</li>
+          <li><strong>備選</strong>：表參道之丘(Omotesando Hills)，空間寬可同坐</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">14:00 - 16:30</div>
+        <div class="timeline-title"><span>☕</span>文青散策：清澄白河<span class="act-type act-sightseeing">觀光</span></div>
+        <a href="https://maps.google.com/?q=35.6803,139.7982" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Blue Bottle Coffee</a> <a href="https://maps.google.com/?q=35.6799,139.7989" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>清澄庭園</a>
+        <div class="timeline-desc">明治神宮前→千代田線→表參道→半藏門線→清澄白河站</div>
+        <ul class="timeline-bullets">
+          <li>☕ Blue Bottle Coffee 旗艦店 / Allpress Espresso</li>
+          <li>🐟 清澄庭園：看鯉魚和龜，門票150日圓</li>
+        </ul>
+        <div class="highlight-box"><span class="label">💡</span>咖啡廳通常2-4人座，建議拆組分開坐或外帶到木場公園野餐。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">17:00 - 19:30</div>
+        <div class="timeline-title"><span>🎮</span>秋葉原<span class="act-type act-shopping">購物</span></div>
+        <a href="https://maps.google.com/?q=35.6988,139.7735" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Yodobashi Akiba</a>
+        <div class="timeline-desc">清澄白河→半藏門線→住吉→新宿線→岩本町（步行5分鐘到秋葉原）</div>
+        <ul class="timeline-bullets">
+          <li>🏬 友都八喜 (Yodobashi Akiba)：最大電器行，有嬰兒用品區</li>
+          <li>🤖 Radio Kaikan：公仔模型聖地</li>
+          <li>💰 帶護照：滿5,500日圓可退稅</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">20:00</div>
+        <div class="timeline-title"><span>🍻</span>居酒屋慶功<span class="act-type act-food">美食</span></div>
+        <ul class="timeline-bullets">
+          <li>🍗 鳥貴族：均一價，19:30先抽號</li>
+          <li>🦀 磯丸水產：24小時，蟹膏甲羅燒必點</li>
+          <li>🍶 天狗居酒屋/土間土間：空間大，可預約9人桌</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- Day 6 -->
+  <div id="day-d6" class="day-panel">
+    <div class="day-header">
+      <div class="day-tag">Day 6</div>
+      <h3>🏙 六本木／麻布台之丘（丘・Tomo・王至聖組）＋ 13 組整裝回台</h3>
+      <p>5月29日(五)　13 組搭 BR197 回台，早上整理行李，當天行程不跟</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-card" style="border-color:rgba(88,166,255,.3);background:rgba(88,166,255,.04);">
+        <div class="timeline-time">早上（13 組專屬）</div>
+        <div class="timeline-title"><span>🧳</span><strong style="color:var(--blue)">13 組：整理行李、準備回台</strong><span class="act-type act-hotel">住宿</span></div>
+        <ul class="timeline-bullets">
+          <li><strong style="color:var(--blue)">13 組：</strong>搭 <strong>BR197</strong> 班機回台，今天不跟大家的行程。早上在西早稻田整理行李、辦理退房，依班機時間安排前往成田機場。</li>
+          <li><strong>Tomo組 & 丘組 & 王至聖組</strong>：悠閒早餐，行李可繼續寄飯店</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">10:00 - 12:00</div>
+        <div class="timeline-title"><span>🎨</span>21_21 Design Sight<span class="act-type act-art">設計藝術</span></div>
+        <a href="https://maps.google.com/?q=35.6636,139.7308" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>21_21 Design Sight</a>
+        <div class="timeline-desc">東京 Midtown 內，由三宅一生與安藤忠雄共同打造的設計美術館，以半地下展覽空間為特色，常設展＋企劃展皆值得一看。</div>
+        <div class="highlight-box"><span class="label">🚇</span>交通：東新宿/西早稻田→大江戶線→六本木站 6出口，步行約3分鐘即達 Tokyo Midtown 內。入場費約 1,400 日圓。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">12:15 - 13:45</div>
+        <div class="timeline-title"><span>🍗</span>午餐：Imakatsu 六本木本店<span class="act-type act-food">美食</span></div>
+        <a href="https://maps.google.com/?q=35.6628,139.7326" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Imakatsu</a>
+        <div class="timeline-desc">必點名物比內地雞雞柳排，空間有限，分2-3組11:30開門就排隊。</div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">14:00 - 16:30</div>
+        <div class="timeline-title"><span>🏙</span>丘組 ／ Tomo組 ／ 王至聖組：下午新宿<span class="act-type act-sightseeing">觀光</span></div>
+        <a href="https://maps.google.com/?q=35.6852,139.7100" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>新宿御苑</a>
+        <ul class="timeline-bullets">
+          <li><strong style="color:var(--purple)">丘組 ／ Tomo組 ／ 王至聖組</strong>：移師新宿 🛍</li>
+          <li>🔹 新宿御苑散策（14:00-15:30，5月底綠意盎然）</li>
+          <li>🔹 Bic Camera 東口 + 伊勢丹 + Lumine Est</li>
+          <li>🔹 NEWoMan 伴手禮區（Press Butter Sand / Tokyo Banana）</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card" style="border-color:rgba(88,166,255,.3);background:rgba(88,166,255,.04);">
+        <div class="timeline-time">13 組：搭 BR197 回台</div>
+        <div class="timeline-title"><span>✈</span><strong style="color:var(--blue)">13 組：長榮 BR197 回台</strong><span class="act-type act-transport">交通</span></div>
+        <div class="highlight-box" style="border-color:rgba(88,166,255,.3);background:rgba(88,166,255,.08);">
+          <span style="color:var(--blue);font-weight:700">BR197 長榮（成田二航廈）— 請依班機時間前往機場</span>
+        </div>
+        <ul class="timeline-bullets" style="margin-top:8px">
+          <li>🧳 早上整理行李、退房</li>
+          <li>🚆 依班機時間搭 N'EX 前往成田機場第2航廈</li>
+          <li>✅ 辦理長榮 BR197 登機手續</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">18:30（丘組・Tomo組・王至聖組）</div>
+        <div class="timeline-title"><span>🍽</span>新宿慶功晚餐 🎉<span class="act-type act-food">美食</span></div>
+        <a href="https://maps.google.com/?q=35.6937,139.7005" target="_blank" class="map-link"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>思い出横丁</a>
+        <ul class="timeline-bullets">
+          <li>🔹 <strong>思い出横丁（回憶小路）</strong>：昭和風居酒屋串燒，氣氛絕佳</li>
+          <li>🔹 <strong>叙々苑 新宿店</strong>：高級燒肉，旅程最後慶功推薦</li>
+          <li>🔹 <strong>鳥貴族 新宿西口店</strong>：平價串燒，輕鬆聚餐</li>
+          <li>慶祝旅程圓滿，盡情享用最後一頓東京美食！🥂</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- Day 7 -->
+  <div id="day-d7" class="day-panel">
+    <div class="day-header">
+      <div class="day-tag">Day 7</div>
+      <h3>✈ N'EX 歸途：最後的東京巡禮</h3>
+      <p>5月30日(六)　各自搭成田特快回國</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-card" style="border-color:rgba(163,113,247,.4)">
+        <div class="timeline-time">07:45 → 09:44</div>
+        <div class="timeline-title"><span>✈</span>丘 組：清晨 N'EX 出發<span class="act-type act-transport">交通</span></div>
+        <ul class="timeline-bullets">
+          <li>07:45 辦退房，計程車至JR新宿站（5-8分鐘）</li>
+          <li>08:29 N'EX 11號，5・6號月台出發</li>
+          <li>09:44 抵達成田T2，辦理 IT281（11:40起飛）</li>
+        </ul>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">10:00 - 16:30</div>
+        <div class="timeline-title"><span>🗺</span>Tomo組 ／ 王至聖組：最後早上自由行動<span class="act-type act-sightseeing">自由</span></div>
+        <ul class="timeline-bullets">
+          <li>行李可繼續寄飯店或新宿站大型置物櫃</li>
+          <li>⏰ <strong>16:30 前</strong>務必回到新宿站取行李，準備搭 N'EX</li>
+        </ul>
+
+        <!-- 兩條路線選擇 -->
+        <div style="margin-top:14px;">
+          <div style="font-size:18px;font-weight:700;color:var(--muted);letter-spacing:.05em;margin-bottom:10px;">📍 參考路線二選一：</div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+
+            <!-- 路線 A：谷中銀座 -->
+            <div style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.3);border-radius:12px;padding:12px;">
+              <div style="font-weight:700;font-size:19px;color:#f59e0b;margin-bottom:4px;">🏘 路線 A　谷中銀座</div>
+              <div style="font-size:13px;color:var(--muted);margin-bottom:8px;">懷舊老街 × 貓咪 × 下町散策</div>
+              <div style="font-size:13px;line-height:1.9;color:var(--text);">
+                🚇 <strong>交通：</strong>新宿→山手線→日暮里站（約30分鐘）<br>
+                🏮 <strong>谷中銀座商店街</strong>（10:00-12:00）<br>
+                　　串燒、貓咪雜貨、古民家咖啡<br>
+                ⛩ <strong>谷中霊園散策</strong>（貓咪聚集地）<br>
+                ☕ <strong>KAYABA COFFEE</strong>（老建築改建，必訪）<br>
+                🍡 <strong>夕燒けだんだん坂</strong>（日暮里夕陽坡道）<br>
+                🚇 <strong>回程：</strong>日暮里→山手線→新宿（約30分鐘）
+              </div>
+            </div>
+
+            <!-- 路線 B：涉谷 D47 -->
+            <div style="background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.3);border-radius:12px;padding:12px;">
+              <div style="font-weight:700;font-size:19px;color:#38bdf8;margin-bottom:4px;">🎨 路線 B　涉谷 D47</div>
+              <div style="font-size:13px;color:var(--muted);margin-bottom:8px;">47都道府縣精選 × 設計 × 美食</div>
+              <div style="font-size:13px;line-height:1.9;color:var(--text);">
+                🚇 <strong>交通：</strong>新宿→JR山手線→涉谷站（約5分鐘）<br>
+                🏬 <strong>Hikarie 8F → D47 MUSEUM</strong>（10:00-12:00）<br>
+                　　匯集日本47縣手工藝品，免費或低票價入場<br>
+                🍽 <strong>D47 食堂</strong>（12:00-13:30）<br>
+                　　每道料理對應一個縣的定食，最後在日本吃遍全國<br>
+                🛍 <strong>涉谷 Scramble Square 展望台</strong>（可選）<br>
+                　　俯瞰十字路口，適合拍紀念照<br>
+                🚇 <strong>回程：</strong>涉谷→JR山手線→新宿（約5分鐘）
+              </div>
+            </div>
+
+          </div>
+
+          <div style="font-size:13px;color:var(--muted);margin-top:8px;padding:6px 10px;background:rgba(255,255,255,.04);border-radius:8px;">
+            💡 <strong>建議：</strong>Tomo 組與王至聖組可各自選，或同選一條一起走。D47 食堂人氣高，<strong>強烈建議提前線上預約</strong>（<a href="https://www.hikarie8.com/d47restaurant/" target="_blank" style="color:#38bdf8;">hikarie8.com</a>）。
+          </div>
+        </div>
+      </div></div>
+      <div class="timeline-item"><div class="timeline-card">
+        <div class="timeline-time">17:09 → 18:28</div>
+        <div class="timeline-title"><span>🚆</span>Tomo組 & 王至聖組：N'EX 45號出發<span class="act-type act-transport">交通</span></div>
+        <ul class="timeline-bullets">
+          <li>17:09 新宿站 5・6號月台 N'EX 45號發車</li>
+          <li>18:28 抵達成田機場第2航廈</li>
+          <li><strong style="color:var(--red)">王至聖 組</strong>：T2辦理 IT203 登機</li>
+          <li><strong style="color:var(--green)">Tomo 組</strong>：步行/接駁車至 <strong>T3</strong>（約15分鐘）辦理 GK11</li>
+        </ul>
+        <div class="highlight-box" style="border-color:rgba(232,69,69,.3)">
+          <span class="label" style="color:var(--red)">⚠ Tomo 組Tomo：</span>捷星 GK11 在第3航廈！18:28抵達後請加快，確保19:35前完成託運。
+        </div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 3: 交通攻略 ===== -->
+<div id="tab-transport" class="tab-content">
+  <div class="info-banner">🚇 <strong>重要：</strong>所有組別請確認 Suica/PASMO 餘額（建議至少3,000日圓）。N'EX 回程票需提前至新宿站免費劃位！</div>
+  <div class="section-title">🔍 依組別篩選</div>
+  <div class="member-filter">
+    <button class="filter-btn active-all" onclick="filterRoutes('all',this)">全部</button>
+    <button class="filter-btn" onclick="filterRoutes('1',this)">🔵 13 組</button>
+    <button class="filter-btn" onclick="filterRoutes('2',this)">🟢 Tomo 組</button>
+    <button class="filter-btn" onclick="filterRoutes('3',this)">🟣 丘 組</button>
+    <button class="filter-btn" onclick="filterRoutes('4',this)">🔴 王至聖 組</button>
+  </div>
+  <div id="route-list">
+    <div class="route-card" data-member="3 4">
+      <div class="route-header"><div class="route-member-dot dot-3"></div><div class="route-member-dot dot-4"></div><div class="route-title">5/24 成田機場 → 大使飯店（丘組 & 王至聖組）</div><div class="route-date">5/24</div></div>
+      <div class="route-steps"><span class="route-step">成田T2</span><span class="route-arrow">→</span><span class="route-step">利木津巴士</span><span class="route-arrow">→</span><span class="route-step">迪士尼大使飯店</span></div>
+      <div class="route-note">約60-80分鐘，免搬行李轉車。在二航廈「星巴克」或「利木津售票處」會合。<br>備選：N'EX→東京站→JR京葉線→舞濱（需步行10-15分鐘轉乘）</div>
+    </div>
+    <div class="route-card" data-member="2">
+      <div class="route-header"><div class="route-member-dot dot-2"></div><div class="route-title">5/24 成田機場 → 樂祥飯店（Tomo 組）</div><div class="route-date">5/24</div></div>
+      <div class="route-steps"><span class="route-step">成田T2</span><span class="route-arrow">→</span><span class="route-step">京成巴士</span><span class="route-arrow">→</span><span class="route-step">新浦安</span><span class="route-arrow">→</span><span class="route-step">樂祥飯店</span></div>
+      <div class="route-note">約60分鐘直達。備選：N'EX→東京站→JR京葉線→新浦安。</div>
+    </div>
+    <div class="route-card" data-member="1">
+      <div class="route-header"><div class="route-member-dot dot-1"></div><div class="route-title">5/24 西早稻田 → 新豐洲（13 組）</div><div class="route-date">5/24 15:30出發</div></div>
+      <div class="route-steps"><span class="route-step">西早稻田</span><span class="route-arrow">→</span><span class="route-step">東西線</span><span class="route-arrow">→</span><span class="route-step">飯田橋</span><span class="route-arrow">→</span><span class="route-step">有樂町線</span><span class="route-arrow">→</span><span class="route-step">豐洲</span></div>
+    </div>
+    <div class="route-card" data-member="1">
+      <div class="route-header"><div class="route-member-dot dot-1"></div><div class="route-title">5/24 深夜 → 西早稻田（13 組）</div><div class="route-date">5/24 21:00後</div></div>
+      <div class="route-steps"><span class="route-step">豐洲</span><span class="route-arrow">→</span><span class="route-step">有樂町線</span><span class="route-arrow">→</span><span class="route-step">飯田橋</span><span class="route-arrow">→</span><span class="route-step">副都心線(棕F線)</span><span class="route-arrow">→</span><span class="route-step">西早稻田</span></div>
+      <span class="route-fare">💴 260日圓</span>
+    </div>
+    <div class="route-card" data-member="2">
+      <div class="route-header"><div class="route-member-dot dot-2"></div><div class="route-title">5/24 深夜 → 樂祥飯店（Tomo 組）</div><div class="route-date">5/24 21:00後</div></div>
+      <div class="route-steps"><span class="route-step">豐洲</span><span class="route-arrow">→</span><span class="route-step">有樂町線</span><span class="route-arrow">→</span><span class="route-step">新木場</span><span class="route-arrow">→</span><span class="route-step">JR京葉線</span><span class="route-arrow">→</span><span class="route-step">新浦安</span><span class="route-arrow">→</span><span class="route-step">飯店接駁車</span></div>
+      <span class="route-fare">💴 地鐵180+JR170日圓</span>
+      <div class="route-note" style="color:var(--red)">⚠ 樂祥在「新浦安」站，不是「舞濱」！</div>
+    </div>
+    <div class="route-card" data-member="3 4">
+      <div class="route-header"><div class="route-member-dot dot-3"></div><div class="route-member-dot dot-4"></div><div class="route-title">5/24 深夜 → 大使飯店（丘組 & 王至聖組）</div><div class="route-date">5/24 21:00後</div></div>
+      <div class="route-steps"><span class="route-step">豐洲</span><span class="route-arrow">→</span><span class="route-step">有樂町線</span><span class="route-arrow">→</span><span class="route-step">新木場</span><span class="route-arrow">→</span><span class="route-step">JR京葉線</span><span class="route-arrow">→</span><span class="route-step">舞濱</span><span class="route-arrow">→</span><span class="route-step">步行Ikspiari</span><span class="route-arrow">→</span><span class="route-step">大使飯店</span></div>
+      <span class="route-fare">💴 地鐵180+JR160日圓</span>
+    </div>
+    <div class="route-card" data-member="1">
+      <div class="route-header"><div class="route-member-dot dot-1"></div><div class="route-title">5/25 清晨 → 舞濱（13 組）</div><div class="route-date">5/25 05:40出發</div></div>
+      <div class="route-steps"><span class="route-step">西早稻田</span><span class="route-arrow">→</span><span class="route-step">副都心線</span><span class="route-arrow">→</span><span class="route-step">新宿三丁目</span><span class="route-arrow">→</span><span class="route-step">丸之內線</span><span class="route-arrow">→</span><span class="route-step">東京站</span><span class="route-arrow">→</span><span class="route-step">京葉線</span><span class="route-arrow">→</span><span class="route-step">舞濱站</span></div>
+    </div>
+    <div class="route-card" data-member="2">
+      <div class="route-header"><div class="route-member-dot dot-2"></div><div class="route-title">5/26 換飯店：樂祥 → La'gent（Tomo 組）</div><div class="route-date">5/26 閉園後</div></div>
+      <div class="route-steps"><span class="route-step">退房寄行李</span><span class="route-arrow">→</span><span class="route-step">全天海洋遊玩</span><span class="route-arrow">→</span><span class="route-step">接駁車回樂祥取行李</span><span class="route-arrow">→</span><span class="route-step">計程車</span><span class="route-arrow">→</span><span class="route-step">La'gent Hotel</span></div>
+      <span class="route-fare">🚕 約1,200日圓（5分鐘）</span>
+    </div>
+    <div class="route-card" data-member="2 4">
+      <div class="route-header"><div class="route-member-dot dot-2"></div><div class="route-member-dot dot-4"></div><div class="route-title">5/29 新宿 → 成田（Tomo組 & 王至聖組 N'EX 45號）</div><div class="route-date">5/29 17:09出發</div></div>
+      <div class="route-steps"><span class="route-step">新宿站 5・6號月台</span><span class="route-arrow">→</span><span class="route-step">N'EX 45號 17:09</span><span class="route-arrow">→</span><span class="route-step">成田T2 18:28</span></div>
+      <div class="route-note">兩組同班車！建議在新宿月台集合同行。<br>王至聖組：→ T2 辦理 IT203<br>Tomo組：→ 步行/接駁至 T3 辦理 GK11（約15分鐘）</div>
+    </div>
+    <div class="route-card" data-member="1">
+      <div class="route-header"><div class="route-member-dot dot-1"></div><div class="route-title">5/29 13 組 → 成田（BR197 回台，請依班機時間搭 N'EX）</div><div class="route-date">5/29</div></div>
+      <div class="route-steps"><span class="route-step">西早稻田 出發</span><span class="route-arrow">→</span><span class="route-step">N'EX（依班機時間）</span><span class="route-arrow">→</span><span class="route-step">成田T2</span></div>
+      <div class="route-note">13 組搭 BR197 回台，早上整理行李退房，依班機起飛時間安排出發。</div>
+    </div>
+    <div class="route-card" data-member="3">
+      <div class="route-header"><div class="route-member-dot dot-3"></div><div class="route-title">5/30 新宿 → 成田（丘 組 N'EX 11號）</div><div class="route-date">5/30 08:29出發</div></div>
+      <div class="route-steps"><span class="route-step">新宿站 5・6號月台</span><span class="route-arrow">→</span><span class="route-step">N'EX 11號 08:29</span><span class="route-arrow">→</span><span class="route-step">成田T2 09:44</span></div>
+      <div class="route-note">辦理 IT281（11:40起飛）。07:45退房後計程車至新宿站。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB 4: 住宿 ===== -->
+<div id="tab-hotel" class="tab-content">
+  <div class="section-title">🏨 住宿概覽</div>
+  <div class="hotel-grid">
+    <div class="hotel-card h1">
+      <div class="hotel-name">西早稻田住所</div>
+      <div class="hotel-en">西早稲田 (Nishi-Waseda)</div>
+      <div class="hotel-detail"><span>📅</span><span class="val">全程 5/24 - 5/30</span></div>
+      <div class="hotel-detail"><span>🚇</span><span class="val">副都心線 西早稻田站</span></div>
+      <div class="hotel-guests"><span class="guest-tag gt-1">13 組 13</span></div>
+    </div>
+    <div class="hotel-card h2">
+      <div class="hotel-name">迪士尼大使飯店</div>
+      <div class="hotel-en">Tokyo Disneyland Hotel</div>
+      <div class="hotel-detail"><span>📅</span><span class="val">5/24 - 5/27</span></div>
+      <div class="hotel-detail"><span>🚇</span><span class="val">JR 舞濱站，步行穿Ikspiari</span></div>
+      <div class="hotel-detail"><span>🏰</span><span class="val">確認 Happy Entry 特權</span></div>
+      <div class="hotel-guests"><span class="guest-tag gt-3">丘 組 丘</span><span class="guest-tag gt-4">王至聖 組 王至聖</span></div>
+    </div>
+    <div class="hotel-card h3">
+      <div class="hotel-name">迪士尼樂祥飯店</div>
+      <div class="hotel-en">Disney Celebration Hotel</div>
+      <div class="hotel-detail"><span>📅</span><span class="val">5/24 - 5/26</span></div>
+      <div class="hotel-detail"><span>🚇</span><span class="val">JR 新浦安站（接駁15-20分鐘）</span></div>
+      <div class="hotel-detail"><span>⚠</span><span class="val" style="color:var(--red)">新浦安站，不是舞濱站！</span></div>
+      <div class="hotel-guests"><span class="guest-tag gt-2">Tomo 組 Tomo</span></div>
+    </div>
+    <div class="hotel-card h4">
+      <div class="hotel-name">La'gent Hotel Tokyo Bay</div>
+      <div class="hotel-en">ラジェントホテル東京ベイ</div>
+      <div class="hotel-detail"><span>📅</span><span class="val">5/26夜 - 5/27</span></div>
+      <div class="hotel-detail"><span>🚌</span><span class="val">免費接駁車 首班06:15/06:35</span></div>
+      <div class="hotel-detail"><span>🚕</span><span class="val">樂祥搭計程車約1,200日圓5分鐘</span></div>
+      <div class="hotel-guests"><span class="guest-tag gt-2">Tomo 組 Tomo</span></div>
+    </div>
+    <div class="hotel-card h1" style="grid-column:1/-1">
+      <div class="hotel-name">新宿格蘭貝爾酒店</div>
+      <div class="hotel-en">Shinjuku Granbell Hotel</div>
+      <div class="hotel-detail"><span>📅</span><span class="val">5/27 - 5/30</span></div>
+      <div class="hotel-detail"><span>🚇</span><span class="val">副都心線 東新宿站步行可達</span></div>
+      <div class="hotel-detail"><span>🥩</span><span class="val">距燒肉一丁目步行5-8分鐘</span></div>
+      <div class="hotel-guests"><span class="guest-tag gt-2">Tomo 組 Tomo</span><span class="guest-tag gt-3">丘 組 丘</span><span class="guest-tag gt-4">王至聖 組 王至聖</span></div>
+    </div>
+  </div>
+  <div class="section-title">📅 住宿時間軸</div>
+  <div style="overflow-x:auto">
+  <table class="flight-table">
+    <thead><tr><th>組別</th><th>5/24-26</th><th>5/27</th><th>5/28-30</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--blue);font-weight:700">13 組</td><td>西早稻田住所</td><td>西早稻田住所</td><td>西早稻田住所</td></tr>
+      <tr><td style="color:var(--green);font-weight:700">Tomo 組</td><td>樂祥飯店<br><span style="font-size:10px;color:var(--muted)">5/26夜換La'gent</span></td><td>格蘭貝爾</td><td>格蘭貝爾</td></tr>
+      <tr><td style="color:var(--purple);font-weight:700">丘 組</td><td>大使飯店</td><td>格蘭貝爾</td><td>格蘭貝爾</td></tr>
+      <tr><td style="color:var(--red);font-weight:700">王至聖 組</td><td>大使飯店</td><td>格蘭貝爾</td><td>格蘭貝爾</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ===== TAB 5: 出發清單 ===== -->
+<div id="tab-checklist" class="tab-content">
+  <div class="section-title">✅ 出發前準備清單</div>
+  <div class="checklist-progress">
+    <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+    <div class="progress-text" id="progress-text">0 / 0 完成</div>
+    <button class="reset-btn" onclick="resetChecklist()">重置</button>
+  </div>
+  <div class="checklist-section">
+
+    <div class="checklist-category">
+      <div class="checklist-cat-title">📋 證件類</div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>護照（確認有效期限超過6個月）<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>回程機票電子票存入手機<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>旅遊保險單確認<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>日本入境卡（可預先填寫Visit Japan Web）<span class="who who-all">全組</span></label></div>
+    </div>
+
+    <div class="checklist-category">
+      <div class="checklist-cat-title">💳 交通與支付</div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>手機 Suica/PASMO 設定完成（或實體卡）<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>Suica 儲值至少 3,000 日圓<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>N'EX 往返票購買完成<span class="who who-2 who-3 who-4">Tomo組/丘組/王至聖組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>N'EX 回程座位劃位（5/27抵達新宿時辦理）<span class="who who-2 who-3 who-4">Tomo組/丘組/王至聖組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>N'EX 票（BR197 回程用，依班機時間安排）<span class="who who-1">13 組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>日圓現金準備（建議每人至少15,000日圓）<span class="who who-all">全組</span></label></div>
+    </div>
+
+    <div class="checklist-category">
+      <div class="checklist-cat-title">🎡 迪士尼必備（5/25 TDL）</div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>東京迪士尼 App 下載並登入<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>App 群組門票設定（丘組或王至聖組負責）<span class="who who-3 who-4">丘組/王至聖組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>迪士尼入園門票確認（存入App）<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>信用卡確認可接收國際簡訊（DPA購買需要）<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>熟悉 DPA/PP 搶購順序：美女與野獸→飛濺山 / 怪獸電力公司→小熊維尼→幽靈公館<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>行動電源充飽（每人建議2顆）<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>前一晚超商買好隔天早餐與糧食<span class="who who-1 who-2">13組/Tomo組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>輕便野餐墊（遊行卡位時使用）<span class="who who-all">全組</span></label></div>
+    </div>
+
+    <div class="checklist-category">
+      <div class="checklist-cat-title">🌊 teamLab 專屬</div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>確認 teamLab Planets 17:00 入場門票<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>穿著可捲褲管的褲子（館內有水深及膝區域）<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>防水袋或密封袋（保護手機/錢包）<span class="who who-all">全組</span></label></div>
+    </div>
+
+    <div class="checklist-category">
+      <div class="checklist-cat-title">🧳 行李類</div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>晴雨兩用傘<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>洋蔥式穿搭（5月底早晚涼，迪士尼海邊風大）<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>行動電源充飽電<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>換洗衣物（7日份）<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>防曬乳<span class="who who-all">全組</span></label></div>
+    </div>
+
+    <div class="checklist-category">
+      <div class="checklist-cat-title">📱 數位準備</div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>網卡或漫遊確認可在日本使用<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>LINE 群組建立，確認四組都在裡面<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>Google Maps 離線地圖下載（東京區域）<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>飯店地址存入手機（日文版）<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>川越 いちのや 包廂預約確認<span class="who who-all">全組</span></label></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" onclick="event.stopPropagation()"><label>新宿燒肉一丁目預約確認<span class="who who-all">全組</span></label></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== TAB 6: 專家提醒 ===== -->
+<div id="tab-tips" class="tab-content">
+  <div class="section-title">💡 迪士尼生存關鍵</div>
+  <div class="tip-list">
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--red)">🔴</span>數位門票群組化（最重要！）</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body"><p>入園前，請<strong>丘組或王至聖組</strong>在官方App建立群組，掃描所有人的門票（含13組、Tomo組）。</p><ul><li><strong>入園第一秒：</strong>由領隊統籌為全體4組搶購DPA或抽取Standby Pass，避免各組動作不一。</li><li>建議前一天在飯店WiFi完成群組設定。</li></ul></div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--red)">🔴</span>行動電源與網卡</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body"><ul><li>迪士尼App極度耗電且需持續定位，每人攜帶<strong>2顆行動電源</strong>。</li><li>使用實體網卡或訊號穩定的漫遊，避免人潮擁擠處斷線。</li><li>落地後立刻確認四組網卡/漫遊正常，在LINE群組同步。</li></ul></div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--gold)">🟡</span>餐廳時段避開策略</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body"><ul><li><strong>高峰：11:30-13:30</strong> 園區餐廳排隊極久，強烈建議避開。</li><li>改在10:30或14:00後用餐。</li><li>13組、Tomo組請前一晚在超商準備行動糧食。</li></ul></div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--gold)">🟡</span>天氣應對（5月底）</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body"><ul><li>5月底早晚有涼意，迪士尼位於海邊風大。</li><li>建議洋蔥式穿法 + 晴雨兩用傘 + 輕便野餐墊。</li></ul></div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--green)">🟢</span>Suica 交通卡</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body"><ul><li>閉園後舞濱站售票機排百人隊，感應Suica入站省20分鐘。</li><li>建議每人至少儲值<strong>3,000日圓</strong>。</li></ul></div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:20px">🎡 迪士尼樂園(TDL) 5/25 完整攻略</div>
+  <div class="tip-list">
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--red)">🔴</span>DPA / PP 搶購優先順序</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body">
+        <p><strong>入園第一秒</strong>全員打開App，依序完成：</p>
+        <ul>
+          <li>🥇 先購買 <strong>#82 美女與野獸 DPA</strong>（10:30前售完）→ 飛濺山次之</li>
+          <li>🥈 同時排 <strong>#123 怪獸電力公司</strong>，抽 <strong>#84 小熊維尼 PP</strong>（10:30前被抽完）</li>
+          <li>🥉 小熊維尼使用後，立刻抽 <strong>#85 幽靈公館 PP</strong></li>
+          <li>📌 午餐排隊卡位時，可順便抽 <strong>#120 星際旅行 PP</strong></li>
+        </ul>
+        <p style="margin-top:8px;color:var(--red)">⚠ DPA 需綁定信用卡，請確認可接收國際簡訊或免驗證。</p>
+        <p>✅ DPA 或 PP 入場均有<strong>1小時緩衝時間</strong>。</p>
+      </div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--gold)">🟡</span>遊行卡位策略</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body">
+        <ul>
+          <li><strong>日間遊行(13:00)</strong>：12:15前卡位在遊行起點「小飛象附近」，可最早看完繼續排隊。</li>
+          <li><strong>夜間遊行(19:30)</strong>：19:00前佔位城堡周圍。</li>
+          <li>建議帶<strong>野餐墊</strong>坐地排隊，舒適度大提升。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--gold)">🟡</span>餐廳與美食攻略</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body">
+        <p><strong>午餐建議（11:30，避開高峰）：</strong></p>
+        <ul>
+          <li>#130 明日樂園舞台餐廳：漢堡、三明治（可預約）</li>
+          <li>#117 輝兒杜兒路兒好時光咖啡：米奇手套刈包</li>
+          <li>#131 汎銀河披薩港：切片披薩</li>
+        </ul>
+        <p style="margin-top:8px"><strong>晚餐建議（18:30）：</strong></p>
+        <ul>
+          <li>#64 西部牛仔廚房：火雞腿・香腸</li>
+          <li>#65 土撥鼠營地廚房：冷麵・米漢堡</li>
+          <li>#67 頑熊餐廳：各式咖哩飯</li>
+          <li>#96 虎克船長廚房：切片披薩</li>
+        </ul>
+        <p style="margin-top:8px;color:var(--red)">⚠ 避開 11:30-13:30 高峰時段，等候超過40分鐘請立刻換下一家。</p>
+      </div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--green)">🟢</span>購物 & 必備物品</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body">
+        <ul>
+          <li>🍿 <strong>爆米花桶</strong>：限定口味，建議進園後先入手</li>
+          <li>🟢 <strong>三眼怪麻吉</strong>：熱賣商品，限量供應</li>
+          <li>🛍 <strong>購物時段</strong>：20:10後於世界市集採買，人潮較少且近出口</li>
+          <li>🎒 <strong>必備</strong>：野餐墊・行動電源x2・網卡確認正常</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--red)">🔴</span>當日維修設施提醒</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body">
+        <p>以下設施 5/25 當日維修，請勿將時間排進行程：</p>
+        <ul>
+          <li>❌ #26 加勒比海盜</li>
+          <li>❌ #53 豪華馬克吐溫號</li>
+          <li>❌ #55 巨雷山</li>
+          <li>❌ #80 小飛象</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:20px">🌊 迪士尼海洋(TDS) 5/26 攻略重點</div>
+  <div class="tip-list">
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--red)">🔴</span>入園第一秒 DPA/PP 搶購順序</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body">
+        <p>入園即開 App，按順序執行：</p>
+        <ol style="padding-left:16px;margin-top:6px;">
+          <li>買 <strong>#82 樂佩公主天燈盛會</strong> DPA（15:00）</li>
+          <li>買 <strong>#2 翱翔：夢幻奇航</strong> DPA（13:00）</li>
+          <li>買 <strong>堅信！～夢想之海～</strong> DPA（晚間大秀保留位）</li>
+          <li>領 <strong>#66 憤怒雙神</strong> PP（14:00）</li>
+        </ol>
+        <p style="margin-top:8px;color:var(--red);">⚠ #81 冰雪之旅維修 → 改搶樂佩公主。#64 印第安納瓊斯維修 → 改搶憤怒雙神 PP。</p>
+        <p style="margin-top:6px;">11:00 排驚魂古塔時同步 App：補買 <strong>#79 小飛俠 DPA</strong>（16:00）+ 領 <strong>#57 尼莫 PP</strong>。</p>
+      </div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--red)">🔴</span>夢幻泉鄉進場策略</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body">
+        <ul>
+          <li>冰雪奇緣（#81）維修，大多數人仍會衝夢幻泉鄉搶 Standby Pass 或買其他 DPA，<strong>翱翔與樂佩公主極易在開園後快速售完</strong>。</li>
+          <li>建議：<strong>入園後不要先跑去夢幻泉鄉</strong>，先站在地中海港灣完成 App 搶購，再前往玩具總動員排隊。</li>
+          <li>15:30 樂佩公主 DPA 時間才進夢幻泉鄉，效率最高。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--gold)">🟡</span>表演與煙火卡位時間</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body">
+        <ul>
+          <li>🌊 <strong>堅信！～夢想之海～（19:30）</strong>：使用 DPA 保留位，按時到場即可，無需提前卡位。</li>
+          <li>✨ <strong>閃耀歡騰慶典（14:00）</strong>：地中海港灣水域，13:30 前在港灣邊找位置，水邊視角最佳。</li>
+          <li>🎆 <strong>眾彩滿夜空煙火（20:40）</strong>：港灣任意位置皆可觀賞，購物後自然卡到位。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--gold)">🟡</span>TDS 餐廳選擇建議</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body">
+        <p><strong>午餐（12:00，美國海濱三選一）：</strong></p>
+        <ul>
+          <li>#45 德倫西餐車：熱狗堡（快速）</li>
+          <li>#46 船屋邊快餐館：漢堡</li>
+          <li>#47 紐約美味坊：熟食三明治</li>
+        </ul>
+        <p style="margin-top:8px"><strong>晚餐（18:45，二選一）：</strong></p>
+        <ul>
+          <li>#96 凱茲堡餐飲廣場：各式咖哩（鄰近神燈劇場）</li>
+          <li>#21 尚比尼兄弟餐廳：義大利麵、披薩（鄰近大秀場地）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--green)">🟢</span>閉園後換飯店（Tomo 組注意）</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body">
+        <ul>
+          <li>Tomo 組今晚需從<strong>樂祥飯店</strong>換到 <strong>La'gent Hotel</strong>（舞濱附近，約 ¥1,200 計程車）。</li>
+          <li>建議 21:00 離園後先搭接駁車回樂祥取行李，再計程車前往 La'gent。</li>
+          <li>La'gent 有免費接駁車，明天 06:15 或 06:35 首班可直達迪士尼——但今天（5/26）已是最後一晚，不用擔心。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:20px">🚆 N'EX 使用守則</div>
+  <div class="tip-list">
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--red)">🔴</span>回程座位劃位（重要！）</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body"><p>N'EX 為全車指定席，有來回票仍需<strong>免費劃位</strong>才能搭乘。</p><p style="margin-top:6px">到 JR 新宿站「指定席售票機」或「綠色窗口」劃位。<strong>5/27抵達新宿時就順便辦，不要等到5/30！</strong></p></div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--red)">🔴</span>Tomo 組的T3挑戰</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body"><p>捷星GK11在<strong>第3航廈</strong>，N'EX停在第2航廈。18:28抵達後前往T3還有一段路，請加快腳步確保19:35前完成行李託運。</p></div>
+    </div>
+    <div class="tip-card" onclick="toggleTip(this)">
+      <div class="tip-header"><div class="tip-title"><span style="color:var(--green)">🟢</span>行李鎖提醒</div><div class="tip-toggle">＋</div></div>
+      <div class="tip-body"><p>N'EX車廂門口有行李鎖，密碼請務必記住，忘記密碼需等到終點站才能解鎖。</p></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== TAB 7: 航班 ===== -->
+<div id="tab-flight" class="tab-content">
+  <div class="section-title">✈ 入境航班（5/24 成田 T2）</div>
+  <div style="overflow-x:auto">
+  <table class="flight-table">
+    <thead><tr><th>組別</th><th>航班</th><th>出發地</th><th>抵達</th><th>入境完成</th><th>目的地</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--green);font-weight:700">Tomo 組</td><td>虎航 IT200</td><td>台北(TPE)</td><td>11:00</td><td>12:00</td><td>樂祥飯店</td></tr>
+      <tr><td style="color:var(--purple);font-weight:700">丘 組</td><td>虎航 IT280</td><td>高雄(KHH)</td><td>12:40</td><td>13:40</td><td>大使飯店</td></tr>
+      <tr><td style="color:var(--red);font-weight:700">王至聖 組</td><td>星宇 JX800</td><td>台北(TPE)</td><td>12:45</td><td>13:45</td><td>大使飯店</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="info-banner">📌 <strong>13組</strong>提早抵達日本，5/24 已在東京西早稻田。下午 15:30 從西早稻田出發，16:30 在新豐洲與各組會合。</div>
+
+  <div class="section-title" style="margin-top:16px">✈ 回程航班</div>
+  <div style="overflow-x:auto">
+  <table class="flight-table">
+    <thead><tr><th>組別</th><th>航班</th><th>日期</th><th>起飛</th><th>機場</th><th>搭車方式</th></tr></thead>
+    <tbody>
+      <tr>
+        <td style="color:var(--blue);font-weight:700">13 組</td>
+        <td>長榮 BR197</td>
+        <td>5/29</td>
+        <td style="color:var(--blue)">—</td>
+        <td>成田 T2</td>
+        <td>依班機時間搭 N'EX</td>
+      </tr>
+      <tr>
+        <td style="color:var(--purple);font-weight:700">丘 組</td>
+        <td>虎航 IT281</td>
+        <td>5/30</td>
+        <td style="color:var(--gold)">11:40</td>
+        <td>成田 T2</td>
+        <td>N'EX 11號 08:29新宿→09:44成田</td>
+      </tr>
+      <tr>
+        <td style="color:var(--red);font-weight:700">王至聖 組</td>
+        <td>虎航 IT203</td>
+        <td>5/30</td>
+        <td>晚間</td>
+        <td>成田 T2</td>
+        <td>N'EX 45號 17:09新宿→18:28成田</td>
+      </tr>
+      <tr>
+        <td style="color:var(--green);font-weight:700">Tomo 組</td>
+        <td>捷星 GK11</td>
+        <td>5/30</td>
+        <td>晚間</td>
+        <td>成田 <strong style="color:var(--red)">T3⚠</strong></td>
+        <td>N'EX 45號→T2→步行/接駁→T3</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="highlight-box" style="border-color:rgba(232,69,69,.4)">
+    <span class="label" style="color:var(--red)">⚠ Tomo 組：</span>捷星 GK11 在成田第3航廈！N'EX 到T2後需步行/接駁到T3，約15分鐘，請加快腳步！
+  </div>
+  <div class="highlight-box" style="margin-top:10px">
+    <span class="label">🚆 N'EX 劃位提醒：</span>5/29 Tomo組、王至聖組同搭 N'EX 45號！5/27抵達新宿時請立刻到指定席售票機免費劃位回程座位。13 組搭 BR197，請依班機時間另行安排。
+  </div>
+</div>
+
+<script>
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function switchDay(id,btn){
+  document.querySelectorAll('.day-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('day-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleTip(card){
+  const body=card.querySelector('.tip-body');
+  const toggle=card.querySelector('.tip-toggle');
+  const open=body.classList.toggle('open');
+  toggle.textContent=open?'－':'＋';
+  toggle.style.transform=open?'rotate(45deg)':'';
+}
+function filterRoutes(member,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.className='filter-btn');
+  btn.className='filter-btn active-'+member;
+  document.querySelectorAll('#route-list .route-card').forEach(card=>{
+    const m=card.dataset.member||'';
+    card.classList.toggle('route-hidden', member!=='all' && !m.includes(member));
+  });
+}
+
+// CHECKLIST
+function updateProgress(){
+  const all=document.querySelectorAll('.checklist-item input[type=checkbox]');
+  const checked=document.querySelectorAll('.checklist-item input[type=checkbox]:checked');
+  const pct=all.length?Math.round(checked.length/all.length*100):0;
+  document.getElementById('progress-bar').style.width=pct+'%';
+  document.getElementById('progress-text').textContent=checked.length+' / '+all.length+' 完成';
+}
+function toggleCheck(item){
+  const cb=item.querySelector('input[type=checkbox]');
+  const lbl=item.querySelector('label');
+  cb.checked=!cb.checked;
+  lbl.classList.toggle('checked',cb.checked);
+  saveChecklist();
+  updateProgress();
+}
+function saveChecklist(){
+  const states=[];
+  document.querySelectorAll('.checklist-item input[type=checkbox]').forEach(cb=>states.push(cb.checked));
+  try{sessionStorage.setItem('cl',JSON.stringify(states));}catch(e){}
+}
+function loadChecklist(){
+  try{
+    const s=JSON.parse(sessionStorage.getItem('cl')||'[]');
+    const items=document.querySelectorAll('.checklist-item');
+    s.forEach((checked,i)=>{
+      if(items[i]){
+        items[i].querySelector('input').checked=checked;
+        items[i].querySelector('label').classList.toggle('checked',checked);
+      }
+    });
+  }catch(e){}
+  updateProgress();
+}
+function resetChecklist(){
+  document.querySelectorAll('.checklist-item input[type=checkbox]').forEach(cb=>cb.checked=false);
+  document.querySelectorAll('.checklist-item label').forEach(l=>l.classList.remove('checked'));
+  try{sessionStorage.removeItem('cl');}catch(e){}
+  updateProgress();
+}
+document.querySelectorAll('.checklist-item input[type=checkbox]').forEach(cb=>{
+  cb.addEventListener('change',()=>{
+    cb.closest('.checklist-item').querySelector('label').classList.toggle('checked',cb.checked);
+    saveChecklist();updateProgress();
+  });
+});
+loadChecklist();
+updateProgress();
+</script>
+</body>
+</html>
